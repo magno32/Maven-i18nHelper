@@ -21,7 +21,11 @@ import org.apache.maven.plugin.MojoExecutionException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.apache.maven.shared.model.fileset.FileSet;
+import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
 /**
  * Goal that generates a single properties file from i18n properties bundles.
@@ -41,20 +45,27 @@ public class PullMojo
     private File outputDirectory;
     /**
      * Output File name.
-     * @parameter expression="i18nHelper.properties"
+     * @parameter expression="i18nHelper.translation"
      * @required
      */
     private String outputFileName;
     /**
      * Places to look for bundles
-     * @parameter expression="${project.resources}"
+     * @parameter
      * @required 
      */
-    private List<File> bundleLocations;
+    private FileSet[] bundleLocations;
+    /**
+     * Languages codes to include in the pull, these will be added to the generated file.
+     * @parameter expression=""
+     */
+    private List<String> languageCodes;
 
     @Override
     public void execute()
             throws MojoExecutionException {
+
+
         File f = outputDirectory;
 
         if (!f.exists()) {
@@ -62,6 +73,15 @@ public class PullMojo
         }
 
         File touch = new File(f, outputFileName);
+        FileSetManager fsm = new FileSetManager();
+        List<String> filePaths = new ArrayList<String>();
+        for (FileSet resourceDir : bundleLocations) {
+            filePaths.addAll(Arrays.asList(fsm.getIncludedFiles(resourceDir)));
+        }
+        
+        for(String filePath : filePaths){
+            getLog().info("Appending: " + filePath);
+        }
 
         FileWriter w = null;
         try {
