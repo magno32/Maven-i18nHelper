@@ -61,4 +61,24 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <distributionManagement>
+        <!-- 
+        we know this is bogus... 
+        but the deploy plugin fails if SOMETHING isn't in this block.
+
+        At the moment, the repo that we deploy to, is not public... so it is not
+        listed here.
+        -->
+        <repository>
+            <id>repo</id>
+            <name>Repository Name</name>
+            <url>scp://host/path/to/repo</url>
+        </repository>
+        <snapshotRepository>
+            <id>repo</id>
+            <name>Repository Name</name>
+            <url>scp://host/path/to/repo</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
