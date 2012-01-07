@@ -106,6 +106,7 @@ public class BundleGenerator {
 
 
         if (!propertyExplicitelySet(f, locale, key)) {
+            writeLineToFile("#Line Added by i18nHelper",f);
             writeLineToFile(key + "=" + value,f);
         }
     }
