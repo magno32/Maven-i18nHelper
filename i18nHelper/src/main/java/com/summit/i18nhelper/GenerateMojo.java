@@ -25,7 +25,7 @@ import org.apache.maven.shared.model.fileset.FileSet;
 /**
  *
  * @goal gen
- * @phase process-resources
+ * @phase compile
  * @threadSafe false
  * @execute phase="process-resources"
  * @author justin

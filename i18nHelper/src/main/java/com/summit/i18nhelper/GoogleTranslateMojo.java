@@ -109,6 +109,7 @@ public class GoogleTranslateMojo extends AbstractMojo {
      * Number of worker threads to use.
      * 
      * @parameter 
+     *  expression="${translate.workers}"
      *  default-value="10"
      */
     private int workers;

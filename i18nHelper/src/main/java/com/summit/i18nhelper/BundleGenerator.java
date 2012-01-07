@@ -35,7 +35,7 @@ import org.apache.maven.plugin.logging.Log;
  */
 public class BundleGenerator {
 
-    Map<String, Properties> explicitProperties;
+    Map<String, Map<String,Properties>> explicitProperties;
     private static final String WRITTEN_FILE_NOTICE = ""
             + "#**************************************************\r\n"
             + "#Resource automatically generated with i18nHelper *\r\n"
@@ -44,7 +44,7 @@ public class BundleGenerator {
             + "#**************************************************";
 
     public BundleGenerator() {
-        explicitProperties = new LinkedHashMap<String, Properties>();
+        explicitProperties = new LinkedHashMap<String, Map<String,Properties>>();
     }
 
     public void generateResources(File baseDir, File inputFile, List<String> languageCodes, Log log) throws Exception {
@@ -105,7 +105,7 @@ public class BundleGenerator {
 
 
 
-        if (!propertyExplicitelySet(f, locale, key)) {
+        if (!propertyExplicitelySet(baseFile,f, locale, key)) {
             writeLineToFile("#Line Added by i18nHelper",f);
             writeLineToFile(key + "=" + value,f);
         }
@@ -118,9 +118,13 @@ public class BundleGenerator {
         outFile.close();
     }
 
-    private boolean propertyExplicitelySet(File localeFile, String locale, String key) throws Exception {
-
-        Properties p = explicitProperties.get(locale);
+    private boolean propertyExplicitelySet(String baseFile, File localeFile, String locale, String key) throws Exception {
+        Map<String,Properties> propsMapForBaseFile = explicitProperties.get(baseFile);
+        if(propsMapForBaseFile == null){
+            propsMapForBaseFile = new LinkedHashMap<String, Properties>();
+            explicitProperties.put(baseFile, propsMapForBaseFile);
+        }
+        Properties p = propsMapForBaseFile.get(locale);
         if (p == null) {
             InputStreamReader in = null;
             try {
@@ -128,7 +132,7 @@ public class BundleGenerator {
                 in = new InputStreamReader(new FileInputStream(localeFile), "UTF-8");
                 p.load(in);
 
-                explicitProperties.put(locale, p);
+                propsMapForBaseFile.put(locale, p);
             } finally {
                 try {
                     in.close();
