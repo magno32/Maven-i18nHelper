@@ -19,11 +19,14 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import org.apache.maven.shared.model.fileset.FileSet;
 import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
@@ -45,7 +48,7 @@ public class PullMojo
     private File outputDirectory;
     /**
      * Output File name.
-     * @parameter expression="i18nHelper.translation"
+     * @parameter expression="i18nHelper.properties"
      * @required
      */
     private String outputFileName;
@@ -57,6 +60,9 @@ public class PullMojo
     private FileSet[] bundleLocations;
     /**
      * Languages codes to include in the pull, these will be added to the generated file.
+     * 
+     * File output will be a java properties file
+     * 
      * @parameter expression=""
      */
     private List<String> languageCodes;
@@ -64,32 +70,61 @@ public class PullMojo
     @Override
     public void execute()
             throws MojoExecutionException {
-
-
+        if(languageCodes == null){
+            languageCodes = Collections.EMPTY_LIST;
+        }else{
+            Collections.sort(languageCodes);
+        }
+        
         File f = outputDirectory;
-
         if (!f.exists()) {
             f.mkdirs();
         }
 
-        File touch = new File(f, outputFileName);
-        FileSetManager fsm = new FileSetManager();
-        List<String> filePaths = new ArrayList<String>();
-        for (FileSet resourceDir : bundleLocations) {
-            filePaths.addAll(Arrays.asList(fsm.getIncludedFiles(resourceDir)));
-        }
-        
-        for(String filePath : filePaths){
-            getLog().info("Appending: " + filePath);
-        }
-
+        File outFile = new File(f, outputFileName);
         FileWriter w = null;
         try {
-            w = new FileWriter(touch);
+            w = new FileWriter(outFile);
 
-            w.write(outputFileName);
+            FileSetManager fsm = new FileSetManager();
+
+            for (FileSet resourceDir : bundleLocations) {
+                String dir = resourceDir.getDirectory();
+                for (String file : fsm.getIncludedFiles(resourceDir)) {
+                    String fullPath = dir + "/" + file;
+
+                    getLog().info(fullPath);
+
+                    w.write("#" + file + "\r\n");
+                    Properties defaults = new Properties();
+                    Map<String, Properties> localizedFiles = new HashMap<String, Properties>();
+                    for (String locale : languageCodes) {
+                        Properties localizedProperties = new Properties();
+                        File localizedFile = new File(fullPath.replaceAll(".properties", "_" + locale + ".properties"));
+                        if (localizedFile.exists()) {
+                            localizedProperties.load(new FileInputStream(localizedFile));
+                            localizedFiles.put(locale, localizedProperties);
+                        }
+                    }
+
+                    defaults.load(new FileInputStream(new File(fullPath)));
+                    for (String prop : defaults.stringPropertyNames()) {
+                        w.write(prop + "=" + defaults.getProperty(prop) + "\r\n");
+                        for (String locale : languageCodes) {
+                            String localeProp = prop + "." + locale;
+                            String translation = "";
+                            if (localizedFiles.get(locale) != null) {
+                                translation = localizedFiles.get(locale).getProperty(prop,"");
+                            }
+                            w.write(localeProp + "=" + translation + "\r\n");
+                        }
+                        w.write("\r\n");
+                    }
+                }
+            }
+
         } catch (IOException e) {
-            throw new MojoExecutionException("Error creating file " + touch, e);
+            throw new MojoExecutionException("Error creating file " + outFile, e);
         } finally {
             if (w != null) {
                 try {
