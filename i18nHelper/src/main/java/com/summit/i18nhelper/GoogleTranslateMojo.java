@@ -142,7 +142,7 @@ public class GoogleTranslateMojo extends AbstractMojo {
         try {
 
             final Properties fullFile = new Properties();
-            fullFile.load(new InputStreamReader(new FileInputStream(fileToTranslate),Charset.forName("UTF-8")));
+            fullFile.load(new InputStreamReader(new FileInputStream(fileToTranslate), Charset.forName("UTF-8")));
 
             GoogleAPI.setHttpReferrer(httpReferrer.toString());
             GoogleAPI.setKey(googleApiKey);
@@ -167,6 +167,8 @@ public class GoogleTranslateMojo extends AbstractMojo {
                                     //String translation = GoogleTranslate.translate(baseValue, defaultLocale, possibleCode, googleApiKey);
                                     try {
                                         String translation = Translate.DEFAULT.execute(baseValue, Language.fromString(defaultLocale), Language.fromString(possibleCode));
+                                        //TODO i don't know enough about unicode to make this prettier
+                                        translation = nativeToAscii(translation);
                                         fullFile.setProperty(key, translation);
                                         getLog().debug("Translated \"" + baseValue + "\" to \"" + translation + "\" (" + possibleCode + ")");
                                     } catch (GoogleAPIException ex) {
@@ -241,5 +243,29 @@ public class GoogleTranslateMojo extends AbstractMojo {
             } catch (Exception ex) {
             }
         }
+    }
+
+    /**
+     * Converts given CharSequence into ASCII String.
+     */
+    public static String nativeToAscii(CharSequence cs) {
+        if (cs == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < cs.length(); i++) {
+            char c = cs.charAt(i);
+            if (c <= 0x7E) {
+                sb.append(c);
+            } else {
+                sb.append("\\u");
+                String hex = Integer.toHexString(c);
+                for (int j = hex.length(); j < 4; j++) {
+                    sb.append('0');
+                }
+                sb.append(hex);
+            }
+        }
+        return sb.toString();
     }
 }
