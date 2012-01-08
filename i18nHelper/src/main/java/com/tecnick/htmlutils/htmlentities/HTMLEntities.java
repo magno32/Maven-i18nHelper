@@ -405,7 +405,8 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced single quotes
      */
-    public static String htmlSingleQuotes(String str) {
+    public static String htmlSingleQuotes(final String in) {        
+        String str = in;
         str = str.replaceAll("[\']", "&rsquo;");
         str = str.replaceAll("&#039;", "&rsquo;");
         str = str.replaceAll("&#145;", "&rsquo;");
@@ -419,7 +420,7 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced single quotes
      */
-    public static String unhtmlSingleQuotes(String str) {
+    public static String unhtmlSingleQuotes(final String str) {
         return str.replaceAll("&rsquo;", "\'");
     }
 
@@ -429,7 +430,8 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced double quotes
      */
-    public static String htmlDoubleQuotes(String str) {
+    public static String htmlDoubleQuotes(final String in) {
+        String str = in;
         str = str.replaceAll("[\"]", "&quot;");
         str = str.replaceAll("&#147;", "&quot;");
         str = str.replaceAll("&#148;", "&quot;");
@@ -442,7 +444,7 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced single quotes
      */
-    public static String unhtmlDoubleQuotes(String str) {
+    public static String unhtmlDoubleQuotes(final String str) {
         return str.replaceAll("&quot;", "\"");
     }
 
@@ -452,7 +454,8 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced quotes
      */
-    public static String htmlQuotes(String str) {
+    public static String htmlQuotes(final String in) {
+        String str = in;
         str = htmlDoubleQuotes(str); //convert double quotes
         str = htmlSingleQuotes(str); //convert single quotes
         return str;
@@ -464,7 +467,8 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced quotes
      */
-    public static String unhtmlQuotes(String str) {
+    public static String unhtmlQuotes(final String in) {
+        String str = in;
         str = unhtmlDoubleQuotes(str); //convert double quotes
         str = unhtmlSingleQuotes(str); //convert single quotes
         return str;
@@ -476,7 +480,8 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced characters
      */
-    public static String htmlAngleBrackets(String str) {
+    public static String htmlAngleBrackets(final String in) {
+        String str = in;
         str = str.replaceAll("<", "&lt;");
         str = str.replaceAll(">", "&gt;");
         return str;
@@ -488,7 +493,8 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced entities
      */
-    public static String unhtmlAngleBrackets(String str) {
+    public static String unhtmlAngleBrackets(final String in) {
+        String str = in;
         str = str.replaceAll("&lt;", "<");
         str = str.replaceAll("&gt;", ">");
         return str;
@@ -500,7 +506,7 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced characters
      */
-    public static String htmlAmpersand(String str) {
+    public static String htmlAmpersand(final String str) {
         return str.replaceAll("&", "&amp;");
     }
 
@@ -510,7 +516,7 @@ public class HTMLEntities {
      * @param str the input string
      * @return string with replaced entities
      */
-    public static String unhtmlAmpersand(String str) {
+    public static String unhtmlAmpersand(final String str) {
         return str.replaceAll("&amp;", "&");
     }
 }
