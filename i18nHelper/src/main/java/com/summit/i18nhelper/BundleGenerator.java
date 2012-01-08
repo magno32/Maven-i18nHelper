@@ -77,7 +77,8 @@ public class BundleGenerator {
                             String possibleCode = splitLine[0].substring(pointIndex + 1);
                             String key = splitLine[0].substring(0, pointIndex);
                             if (languageCodes.contains(possibleCode)) {
-                                appendToFile(possibleCode, baseDir, currentFile, key, fullFile.getProperty(splitLine[0]));
+                                final String property = GoogleTranslateMojo.nativeToAscii(fullFile.getProperty(splitLine[0]));
+                                appendToFile(possibleCode, baseDir, currentFile, key, property);
                             }
                         }
                     }
