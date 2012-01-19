@@ -16,6 +16,7 @@
 package com.summit.i18nhelper;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -62,10 +63,10 @@ public class GenerateMojo extends AbstractMojo {
         if (!genDir.exists()) {
             genDir.mkdirs();
         }
-        BundleGenerator bundleGenerator = new BundleGenerator();
+        BundleGenerator bundleGenerator = new BundleGenerator(getLog());
         try {
             bundleGenerator.generateResources(genDir, genInputFile, languageCodes, getLog());
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             throw new MojoFailureException(ex, ex.getLocalizedMessage(), "Error generating resources.");
         }
     }

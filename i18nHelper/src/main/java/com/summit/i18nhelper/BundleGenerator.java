@@ -35,7 +35,8 @@ import org.apache.maven.plugin.logging.Log;
  */
 public class BundleGenerator {
 
-    Map<String, Map<String,Properties>> explicitProperties;
+    Log mavenLog;
+    Map<String, Map<String, Properties>> explicitProperties;
     private static final String WRITTEN_FILE_NOTICE = ""
             + "#**************************************************\r\n"
             + "#Resource automatically generated with i18nHelper *\r\n"
@@ -43,11 +44,12 @@ public class BundleGenerator {
             //+ "#Resource automatically generated with i18nHelper *\r\n"
             + "#**************************************************";
 
-    public BundleGenerator() {
-        explicitProperties = new LinkedHashMap<String, Map<String,Properties>>();
+    public BundleGenerator(Log log) {
+        explicitProperties = new LinkedHashMap<String, Map<String, Properties>>();
+        mavenLog = log;
     }
 
-    public void generateResources(File baseDir, File inputFile, List<String> languageCodes, Log log) throws Exception {
+    public void generateResources(File baseDir, File inputFile, List<String> languageCodes, Log log) throws IOException {
         final Properties fullFile = new Properties();
         final Charset charset = Charset.forName("UTF-8");
         fullFile.load(new InputStreamReader(new FileInputStream(inputFile), charset));
@@ -92,9 +94,15 @@ public class BundleGenerator {
         }
     }
 
-    private void appendToFile(String locale, File baseDir, String baseFile, String key, String value) throws Exception {
+    private void appendToFile(String locale, File baseDir, String baseFile, String key, String value) throws IOException {
         String localeFile = baseFile.replaceAll(".properties", "_" + locale + ".properties");
-        File dir = new File(baseDir, baseFile.substring(0, baseFile.lastIndexOf("/")));
+        mavenLog.info("BaseDir: " + baseDir + " Base File: " + baseFile);
+        File dir;
+        if (baseFile.lastIndexOf("/") > 0) {
+            dir = new File(baseDir, baseFile.substring(0, baseFile.lastIndexOf("/")));
+        }else{
+            dir = new File(baseDir,baseFile);
+        }
         if (!dir.exists()) {
             dir.mkdirs();
         }
@@ -106,22 +114,22 @@ public class BundleGenerator {
 
 
 
-        if (!propertyExplicitelySet(baseFile,f, locale, key)) {
-            writeLineToFile("#Line Added by i18nHelper",f);
-            writeLineToFile(key + "=" + value,f);
+        if (!propertyExplicitelySet(baseFile, f, locale, key)) {
+            writeLineToFile("#Line Added by i18nHelper", f);
+            writeLineToFile(key + "=" + value, f);
         }
     }
 
-    private void writeLineToFile(String string, File f) throws Exception{
+    private void writeLineToFile(String string, File f) throws IOException {
         OutputStreamWriter outFile = new OutputStreamWriter(new FileOutputStream(f, true), "UTF-8");
 
         outFile.write(string + "\r\n");
         outFile.close();
     }
 
-    private boolean propertyExplicitelySet(String baseFile, File localeFile, String locale, String key) throws Exception {
-        Map<String,Properties> propsMapForBaseFile = explicitProperties.get(baseFile);
-        if(propsMapForBaseFile == null){
+    private boolean propertyExplicitelySet(String baseFile, File localeFile, String locale, String key) throws IOException {
+        Map<String, Properties> propsMapForBaseFile = explicitProperties.get(baseFile);
+        if (propsMapForBaseFile == null) {
             propsMapForBaseFile = new LinkedHashMap<String, Properties>();
             explicitProperties.put(baseFile, propsMapForBaseFile);
         }
