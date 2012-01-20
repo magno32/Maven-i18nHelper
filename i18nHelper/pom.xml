@@ -80,14 +80,14 @@
         listed here.
         -->
         <repository>
-            <id>repo</id>
-            <name>Repository Name</name>
-            <url>scp://host/path/to/repo</url>
+            <id>summitRepo-releases</id>
+            <name>summitReleases</name>
+            <url>http://devel.summitsystemsinc.net/mvnrep/libs-releases-local</url>
         </repository>
         <snapshotRepository>
-            <id>repo</id>
-            <name>Repository Name</name>
-            <url>scp://host/path/to/repo</url>
+            <id>summitRepo-snapshots</id>
+            <name>Summit Snapshots</name>
+            <url>http://devel.summitsystemsinc.net/mvnrep/libs-snapshots-local</url>
         </snapshotRepository>
     </distributionManagement>
 
