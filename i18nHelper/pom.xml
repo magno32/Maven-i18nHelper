@@ -8,6 +8,10 @@
     <packaging>maven-plugin</packaging>
     <name>i18nHelper Maven Mojo</name>
     <url>https://github.com/magno32/Maven-i18nHelper</url>
+    <scm>
+       <developerConnection>scm:git:git://github.com/magno32/Maven-i18nHelper.git/i18nHelper</developerConnection> 
+       <connection>scm:git:git://github.com/magno32/Maven-i18nHelper.git/i18nHelper</connection>
+    </scm>
     <build>
         <plugins>
             <plugin>
