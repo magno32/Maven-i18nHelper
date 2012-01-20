@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.summit</groupId>
     <artifactId>i18nHelper</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>i18nHelper Maven Mojo</name>
     <url>https://github.com/magno32/Maven-i18nHelper</url>
