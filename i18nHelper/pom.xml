@@ -9,8 +9,8 @@
     <name>i18nHelper Maven Mojo</name>
     <url>https://github.com/magno32/Maven-i18nHelper</url>
     <scm>
-       <developerConnection>scm:git:https://github.com/magno32/Maven-i18nHelper.git</developerConnection> 
-       <connection>scm:git:https://github.com/magno32/Maven-i18nHelper.git</connection>
+       <developerConnection>scm:git:git@github.com:magno32/Maven-i18nHelper.git</developerConnection> 
+       <connection>scm:git:git@github.com:magno32/Maven-i18nHelper.git</connection>
     </scm>
     <build>
         <plugins>
