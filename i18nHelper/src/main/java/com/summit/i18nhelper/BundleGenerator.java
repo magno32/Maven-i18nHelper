@@ -96,7 +96,7 @@ public class BundleGenerator {
 
     private void appendToFile(String locale, File baseDir, String baseFile, String key, String value) throws IOException {
         String localeFile = baseFile.replaceAll(".properties", "_" + locale + ".properties");
-        mavenLog.info("BaseDir: " + baseDir + " Base File: " + baseFile);
+        mavenLog.debug("BaseDir: " + baseDir + " Base File: " + baseFile);
         File dir;
         if (baseFile.lastIndexOf("/") > 0) {
             dir = new File(baseDir, baseFile.substring(0, baseFile.lastIndexOf("/")));
@@ -111,7 +111,7 @@ public class BundleGenerator {
             f.createNewFile();
             writeLineToFile(WRITTEN_FILE_NOTICE, f);
         }
-
+        mavenLog.debug("Writing to locale file: " + f.getPath());
 
 
         if (!propertyExplicitelySet(baseFile, f, locale, key)) {

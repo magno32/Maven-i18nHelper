@@ -34,6 +34,13 @@ import org.apache.maven.shared.model.fileset.FileSet;
 public class GenerateMojo extends AbstractMojo {
 
     /**
+     * Location of the file.
+     * @parameter expression="${project.build.directory}"
+     * @required
+     */
+    private File outputDirectory;
+    
+    /**
      * @parameter 
      *  expression="${i18n.gen.input}"
      *  default-value="${project.build.directory}/i18nHelper-translated.properties"
@@ -59,7 +66,7 @@ public class GenerateMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        File genDir = new File("target/classes/");
+        File genDir = new File(outputDirectory,"classes");
         if (!genDir.exists()) {
             genDir.mkdirs();
         }
