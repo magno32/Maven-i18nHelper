@@ -19,17 +19,12 @@ import com.google.api.GoogleAPI;
 import com.google.api.GoogleAPIException;
 import com.google.api.translate.Language;
 import com.google.api.translate.Translate;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -64,14 +59,14 @@ public class GoogleTranslateMojo extends AbstractMojo {
     /**
      * Output File name.
      * @parameter 
-     *  expression="${translate.outputFilename}" 
+     *  expression="${i18nHelper.translateOut}" 
      *  default-value="i18nHelper-translated.properties"
      */
     private String outputFileName;
     /**
      * The generated file from the pull goal.
      * @parameter 
-     *  expression="${translate.fileToTranslate}"
+     *  expression="${i18nHelper.translateIn}"
      *  default-value="${project.build.directory}/i18nHelper.properties"
      */
     private File fileToTranslate;
@@ -85,6 +80,7 @@ public class GoogleTranslateMojo extends AbstractMojo {
     /**
      * Force the translation even if one is provided
      * @parameter 
+     *  expression="${i18nHelper.forceTranslate}"
      *  default-value="false"
      */
     private boolean forceTranslation;
@@ -96,13 +92,18 @@ public class GoogleTranslateMojo extends AbstractMojo {
      * @parameter 
      */
     private List<String> languageCodes;
+    
+    /**
+     * 
+     * @parameter
+     */
+    private String languageCode;
+    
     /**
      * Google API Key, you have to provide this yourself...
      * 
-     * @parameter 
-     *  expression="${translate.googleApiKey}"
+     * @parameter expression="${translate.googleApiKey}"
      * 
-     * @required
      */
     private String googleApiKey;
     /**
@@ -129,8 +130,14 @@ public class GoogleTranslateMojo extends AbstractMojo {
 
         final List<Future> runningTasks = new LinkedList<Future>();
         ExecutorService executorService = Executors.newFixedThreadPool(workers);
+        if(languageCodes == null){
+            languageCodes = Collections.EMPTY_LIST;
+        }
 
-
+        if(languageCode != null && !languageCode.isEmpty()){
+            languageCodes = Arrays.asList(languageCode);
+        }
+        
         File f = outputDirectory;
         if (!f.exists()) {
             f.mkdirs();
@@ -145,6 +152,7 @@ public class GoogleTranslateMojo extends AbstractMojo {
             fullFile.load(new InputStreamReader(new FileInputStream(fileToTranslate), Charset.forName("UTF-8")));
 
             GoogleAPI.setHttpReferrer(httpReferrer.toString());
+            getLog().info("Using api key: " + googleApiKey);
             GoogleAPI.setKey(googleApiKey);
 
             int totalKeys = fullFile.size();
