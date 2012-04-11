@@ -1,0 +1,3 @@
+[submodule "website"]
+	path = website
+	url = git@github.com:magno32/Maven-i18nHelper.git
