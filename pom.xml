@@ -27,6 +27,7 @@
 	<repositoryName>Maven-i18nHelper</repositoryName>
 	<repositoryOwner>magno32</repositoryOwner>
 	<path>docs/${project.version}</path>
+	<merge>true</merge>
       </configuration>
       <executions>
         <execution>
