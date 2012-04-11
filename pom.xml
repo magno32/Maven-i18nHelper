@@ -26,6 +26,7 @@
         <message>Creating site for ${project.version}</message>
 	<repositoryName>Maven-i18nHelper</repositoryName>
 	<repositoryOwner>magno32</repositoryOwner>
+	<path>docs/${project.version}</path>
       </configuration>
       <executions>
         <execution>
