@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Reactor Dependency Convergence</title>
+    <title>Project Build Plugins</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                i18nHelper-examples
+                i18nHelper Maven Mojo Parent
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2012-04-11</span>
                   &nbsp;| <span id="projectVersion">Version: 0.1.2-SNAPSHOT</span>
                       </div>
-            <div class="xright">                    <a href="./" title="i18nHelper-examples">i18nHelper-examples</a>
+            <div class="xright">                    <a href="./" title="i18nHelper Maven Mojo Parent">i18nHelper Maven Mojo Parent</a>
               
         
       </div>
@@ -42,15 +42,18 @@
       <div id="navcolumn">
              
         
-                                <h5>Parent Project</h5>
+                                          <h5>Modules</h5>
                   <ul>
                   <li class="none">
-                          <a href="../index.html" title="i18nHelper Maven Mojo Parent">i18nHelper Maven Mojo Parent</a>
+                          <a href="i18nHelper/index.html" title="i18nHelper Maven Mojo">i18nHelper Maven Mojo</a>
+            </li>
+                  <li class="none">
+                          <a href="i18nHelper-examples/index.html" title="i18nHelper-examples">i18nHelper-examples</a>
             </li>
           </ul>
                        <h5>Project Documentation</h5>
                   <ul>
-                                                                                                                                                                                                                                                                                                                        <li class="expanded">
+                                                                                                                                                                                                                                                                                                                                          <li class="expanded">
                           <a href="project-info.html" title="Project Information">Project Information</a>
                     <ul>
                       <li class="none">
@@ -66,8 +69,8 @@
                           <a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
             </li>
                       <li class="none">
-                          <a href="plugins.html" title="Project Plugins">Project Plugins</a>
-            </li>
+            <strong>Project Plugins</strong>
+          </li>
                       <li class="none">
                           <a href="integration.html" title="Continuous Integration">Continuous Integration</a>
             </li>
@@ -84,13 +87,16 @@
                           <a href="team-list.html" title="Project Team">Project Team</a>
             </li>
                       <li class="none">
-            <strong>Dependency Convergence</strong>
-          </li>
+                          <a href="dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a>
+            </li>
                       <li class="none">
                           <a href="source-repository.html" title="Source Repository">Source Repository</a>
             </li>
                       <li class="none">
                           <a href="plugin-management.html" title="Plugin Management">Plugin Management</a>
+            </li>
+                      <li class="none">
+                          <a href="modules.html" title="Project Modules">Project Modules</a>
             </li>
                       <li class="none">
                           <a href="project-summary.html" title="Project Summary">Project Summary</a>
@@ -107,11 +113,7 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <div class="section"><h2>Reactor Dependency Convergence<a name="Reactor_Dependency_Convergence"></a></h2><table border="0" class="bodyTable"><caption>
-  <b>Legend:</b>
-</caption><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td>All projects share one version of the dependency.</td></tr><tr class="b"><td><img alt="error" src="images/icon_error_sml.gif" /></td><td>At least one project has a differing version of the dependency.</td></tr></table><br /><table border="0" class="bodyTable"><caption>
-  <b>Statistics:</b>
-</caption><tr class="a"><th>Number of sub-projects:</th><td>3</td></tr><tr class="b"><th>Number of dependencies (NOD):</th><td>4</td></tr><tr class="a"><th>Number of unique artifacts (NOA):</th><td>4</td></tr><tr class="b"><th>Number of SNAPSHOT artifacts (NOS):</th><td>0</td></tr><tr class="a"><th>Convergence (NOD/NOA):</th><td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>100%</b></td></tr><tr class="b"><th>Ready for Release (100% Convergence and no SNAPSHOTS):</th><td><img alt="success" src="images/icon_success_sml.gif" />&#160;<b>Success</b></td></tr></table></div><div class="section"><h3>Dependencies used in sub-projects<a name="Dependencies_used_in_sub-projects"></a></h3><div class="section"><h4>junit:junit<a name="junit:junit"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">3.8.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="http://maven.apache.org">com.summit:i18nHelper-examples</a></li><li><a class="externalLink" href="https://github.com/magno32/Maven-i18nHelper">com.summit:i18nHelper</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.apache.maven.shared:file-management<a name="org.apache.maven.shared:file-management"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">1.2.1</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/magno32/Maven-i18nHelper">com.summit:i18nHelper</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.apache.maven:maven-plugin-api<a name="org.apache.maven:maven-plugin-api"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">2.0</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/magno32/Maven-i18nHelper">com.summit:i18nHelper</a></li></ol></td></tr></table></td></tr></table></div><div class="section"><h4>org.json:json<a name="org.json:json"></a></h4><table border="0" class="bodyTable"><tr class="a"><td><img alt="success" src="images/icon_success_sml.gif" /></td><td><table border="0" class="bodyTable"><tr class="b"><td width="25%">20090211</td><td><ol style="list-style-type: lower-alpha"><li><a class="externalLink" href="https://github.com/magno32/Maven-i18nHelper">com.summit:i18nHelper</a></li></ol></td></tr></table></td></tr></table></div></div>
+        <div class="section"><h2>Project Build Plugins<a name="Project_Build_Plugins"></a></h2><a name="Project_Build_Plugins"></a><table border="0" class="bodyTable"><tr class="a"><th>GroupId</th><th>ArtifactId</th><th>Version</th></tr><tr class="b"><td>com.github.github</td><td><a class="externalLink" href="https://github.com/github/maven-plugins">site-maven-plugin</a></td><td>0.5</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-clean-plugin/">maven-clean-plugin</a></td><td>2.4.1</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-deploy-plugin/">maven-deploy-plugin</a></td><td>2.7</td></tr><tr class="a"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-install-plugin/">maven-install-plugin</a></td><td>2.3.1</td></tr><tr class="b"><td>org.apache.maven.plugins</td><td><a class="externalLink" href="http://maven.apache.org/plugins/maven-site-plugin/">maven-site-plugin</a></td><td>3.0</td></tr></table></div><div class="section"><h2>Project Report Plugins<a name="Project_Report_Plugins"></a></h2><a name="Project_Report_Plugins"></a><p>There are no plugins reports defined in the Reporting part of this project.</p></div>
       </div>
     </div>
     <div class="clear">
