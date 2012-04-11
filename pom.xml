@@ -124,5 +124,9 @@
             <name>Summit Snapshots</name>
             <url>http://devel.summitsystemsinc.net/mvnrep/libs-snapshots-local</url>
         </snapshotRepository>
+	<site>
+		<id>staging</id>
+		<url>file:target/siteStage</url>
+	</site>
     </distributionManagement>
 </project>
