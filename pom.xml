@@ -6,7 +6,7 @@
     <version>0.1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>i18nHelper Maven Mojo Parent</name>
-    <url>https://github.com/magno32/Maven-i18nHelper</url>
+    <url>https://magno32.github.com/Maven-i18nHelper/docs/${project.version}</url>
     <scm>
         <developerConnection>scm:git:git@github.com:magno32/Maven-i18nHelper.git</developerConnection> 
         <connection>scm:git:git@github.com:magno32/Maven-i18nHelper.git</connection>
@@ -124,9 +124,5 @@
             <name>Summit Snapshots</name>
             <url>http://devel.summitsystemsinc.net/mvnrep/libs-snapshots-local</url>
         </snapshotRepository>
-	<site>
-	    <id>devel.summitsystemsinc.net</id>
-	    <url>scp://devel.summitsystemsinc.net/var/www/devel/docs/i18nHelper/${project.version}</url>
-	</site>
     </distributionManagement>
 </project>

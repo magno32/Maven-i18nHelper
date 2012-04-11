@@ -10,7 +10,6 @@
   <artifactId>i18nHelper-examples</artifactId>
   <version>0.1.2-SNAPSHOT</version>
   <name>i18nHelper-examples</name>
-  <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
