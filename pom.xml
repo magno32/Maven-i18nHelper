@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.summit</groupId>
     <artifactId>i18nHelper-parent</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.1.2</version>
     <packaging>pom</packaging>
     <name>i18nHelper Maven Mojo Parent</name>
     <url>https://magno32.github.com/Maven-i18nHelper/docs/${project.version}</url>

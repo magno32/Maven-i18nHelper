@@ -4,11 +4,11 @@
   <parent>
     <artifactId>i18nHelper-parent</artifactId>
     <groupId>com.summit</groupId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.1.2</version>
   </parent>
   <groupId>com.summit</groupId>
   <artifactId>i18nHelper-examples</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.2</version>
   <name>i18nHelper-examples</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
