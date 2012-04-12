@@ -18,7 +18,7 @@
             </plugin>
         </plugins>
     </reporting>
-    <build>
+    <build>    
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
